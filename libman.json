@@ -1,0 +1,32 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "bootstrap@5.1.3",
+      "destination": "wwwroot/bootstrap/",
+      "files": [
+        "css/bootstrap.min.css",
+        "js/bootstrap.bundle.min.js"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "toastr@2.1.4",
+      "destination": "wwwroot/toastr/",
+      "files": [
+        "build/toastr.min.css",
+        "build/toastr.min.js"
+      ]
+    },
+    {
+      "provider": "jsdelivr",
+      "library": "@fortawesome/fontawesome-free@6.0.0",
+      "destination": "wwwroot/fortawesome/fontawesome-free/",
+      "files": [
+        "css/all.min.css",
+        "js/all.min.js"
+      ]
+    }
+  ]
+}

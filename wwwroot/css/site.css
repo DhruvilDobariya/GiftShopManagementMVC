@@ -1,0 +1,83 @@
+html {
+    scroll-behavior: smooth;
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.header {
+    /*background-image: linear-gradient(to right,#333333,#dd1818)*/;
+    /*background-image: linear-gradient(to right,#13294b,#d61b3c);*/
+    background-image: linear-gradient(to right,#13294b,#dd1818);
+}
+
+.table {
+    border-width: 0px;
+    border-style: none;
+}
+
+.header2 {
+    background-image: linear-gradient(to right,#13294b,#13294b);
+}
+
+    .header2:hover {
+        color: white;
+    }
+
+.btn-gradient {
+    background-color: #13294b;
+    color: white;
+}
+
+    .btn-gradient:hover {
+        background-color: #163e7b;
+        color: white;
+    }
+
+table th, table td {
+    white-space: nowrap;
+}
+
+.box {
+    width: 390px;
+    background-color: #f5f5f5;
+}
+
+.link {
+    color: black;
+    text-decoration: none;
+}
+
+    .link:hover {
+        cursor: pointer;
+        color: gray;
+        text-decoration: none;
+    }
+
+.btn-blue {
+    background-color: rgb(81,43,212);
+    color: white;
+}
+
+.scrollmanu {
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.scrollmanu {
+    overflow: auto;
+    white-space: nowrap;
+}
