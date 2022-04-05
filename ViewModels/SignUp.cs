@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace GiftShopManagement.Models
 {
     [Index(nameof(UserName), IsUnique = true)]
-    public class User
+    public class SignUp
     {
         [Key]
         public int UserId { get; set; }
@@ -20,10 +20,15 @@ namespace GiftShopManagement.Models
         [DataType(DataType.Password)]
         public string Password { get; set; } = null!;
 
-        [Required(ErrorMessage = "Please Enter Name")]
-        [MaxLength(250, ErrorMessage = "Name Max length must less then or equal to 50 character")]
-        [MinLength(1, ErrorMessage = "Name must at least one character")]
-        public string Name { get; set; } = null!;
+        [Required(ErrorMessage = "Please Enter FirstName")]
+        [MaxLength(250, ErrorMessage = "FirstName Max length must less then or equal to 50 character")]
+        [MinLength(1, ErrorMessage = "FirstName must at least one character")]
+        public string FirstName { get; set; } = null!;
+
+        [Required(ErrorMessage = "Please Enter LastName")]
+        [MaxLength(250, ErrorMessage = "LastName Max length must less then or equal to 50 character")]
+        [MinLength(1, ErrorMessage = "LastName must at least one character")]
+        public string LastName { get; set; } = null!;
 
         [Required(ErrorMessage = "Please Enter Email")]
         [MaxLength(250, ErrorMessage = "Email Max length must less then or equal to 50 character")]
