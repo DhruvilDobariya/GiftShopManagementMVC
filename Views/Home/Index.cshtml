@@ -1,8 +1,20 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> _signInManager
+@{
     ViewData["Title"] = "Home Page";
 }
-
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
+    <a class="btn btn-danger" asp-action="Login" asp-controller="Account" asp-route-returnUrl="@Context.Request.Path">Log in</a>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @{
+        if (_signInManager.IsSignedIn(User))
+        {
+            <p class="text-end">
+                <button class="btn btn-danger">@User.Identity.Name</button>
+                <a class="btn btn-danger" asp-action="Logout" asp-controller="Account">Log out</a>
+            </p>
+        }
+    }
+    
 </div>

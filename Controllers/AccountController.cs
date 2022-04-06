@@ -1,16 +1,16 @@
-﻿using GiftShopManagement.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using GiftShopManagement.Insterfaces;
+using GiftShopManagement.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GiftShopManagement.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IUserRepository _userRepository;
 
-        public AccountController(UserManager<ApplicationUser> userManager)
+        public AccountController(IUserRepository userRepository)
         {
-            _userManager = userManager;
+            _userRepository = userRepository;
         }
 
         public IActionResult Create()
@@ -22,33 +22,68 @@ namespace GiftShopManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(SignUp user)
         {
-            var newUser = new ApplicationUser()
+            var result = await _userRepository.CreateUserAsync(user);
+            if (!result.Succeeded)
             {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                PhoneNumber = user.MobileNo,
-                Address = user.Address,
-                UserName = user.UserName,
-                CreatedDate = DateTime.Now
-            };
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View(user);
+            }
+            ModelState.Clear();
+            ViewBag.Msg = "User Created";
+            return View();
+        }
+
+        public async Task<IActionResult> Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(Login loginModel)
+        {
             if (ModelState.IsValid)
             {
-                var result = await _userManager.CreateAsync(newUser,user.Password);
+                var result = await _userRepository.SignInUserAsync(loginModel);
                 if (!result.Succeeded)
                 {
-                    foreach(var error in result.Errors)
-                    {
-                        ModelState.AddModelError("", error.Description);
-                    }
-                    return View(user);
+                    ModelState.AddModelError("", "Invalid Username or Password");
+                    return View(loginModel);
                 }
-                else
-                {
-                    ViewBag.Msg = "User Created";
-                }
+                return RedirectToAction("Index", "Home");
             }
-            return View(user);
+            return View(loginModel);
+        }
+
+        /*[HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(Login loginModel, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(loginModel.UserName, loginModel.Password, loginModel.RememberMe, false);
+                if (!result.Succeeded)
+                {
+                    ModelState.AddModelError("", "Invalid Username or Password");
+                    return View(loginModel);
+                }
+                if (!string.IsNullOrEmpty(returnUrl))
+                {
+                    return LocalRedirect(returnUrl);
+                }
+                return RedirectToAction("Index", "Home");
+            }
+            return View(loginModel);
+        }*/
+
+        public async Task<IActionResult> Logout()
+        {
+            await _userRepository.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

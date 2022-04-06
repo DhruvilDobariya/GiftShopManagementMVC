@@ -13,17 +13,18 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<GiftShopContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<GiftShopContext>();
-builder.Services.Configure<IdentityOptions>(options =>
-/*{
+/*builder.Services.Configure<IdentityOptions>(options =>
+{
     options.Password.RequiredLength = 8;
     options.Password.RequiredUniqueChars = 1;
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequireUppercase = true;
-});
-*/
+});*/
+
 builder.Services.AddTransient(typeof(ICRUDRepository<>), typeof(CRUDRepository<>));
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
