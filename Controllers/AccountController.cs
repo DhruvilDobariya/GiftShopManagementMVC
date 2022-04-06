@@ -30,12 +30,11 @@ namespace GiftShopManagement.Controllers
                 PhoneNumber = user.MobileNo,
                 Address = user.Address,
                 UserName = user.UserName,
-                PasswordHash = user.Password,
                 CreatedDate = DateTime.Now
             };
             if (ModelState.IsValid)
             {
-                var result = await _userManager.CreateAsync(newUser);
+                var result = await _userManager.CreateAsync(newUser,user.Password);
                 if (!result.Succeeded)
                 {
                     foreach(var error in result.Errors)
@@ -43,6 +42,10 @@ namespace GiftShopManagement.Controllers
                         ModelState.AddModelError("", error.Description);
                     }
                     return View(user);
+                }
+                else
+                {
+                    ViewBag.Msg = "User Created";
                 }
             }
             return View(user);
