@@ -19,11 +19,19 @@ namespace GiftShopManagement.Models
         [Required(ErrorMessage = "Please Enter Quantity")]
         public int Quantity { get; set; }
 
+        [DataType(DataType.Currency)]
+        [Display(Name = "Price Per Pice")]
+        public decimal PricePerPice { get; set; }
+
+        [DataType(DataType.Currency)]
+        [Display(Name = "Total Price")]
+        public decimal TotalPrice { get; set; }
+
         [DataType(DataType.DateTime)]
         public DateTime ModificationDate { get; set; }
 
         [DataType(DataType.DateTime)]
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreationDate { get; set; }
 
         public Invoice? Invoice { get; set; }
         public Gift? Gift { get; set; }

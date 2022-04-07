@@ -15,11 +15,15 @@ namespace GiftShopManagement.Models
         [Required(ErrorMessage = "Please Enter Quantity Gift")]
         public int Quantity { get; set; }
 
+        [Required(ErrorMessage = "Please Enter Stock Delivery Date")]
+        [Display(Name = "Stock Delivery Date")]
+        public DateTime StockDeliveryDate { get; set; }
+
         [DataType(DataType.DateTime)]
         public DateTime ModificationDate { get; set; }
 
         [DataType(DataType.DateTime)]
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreationDate { get; set; }
 
         public Gift? Gift { get; set; }
     }

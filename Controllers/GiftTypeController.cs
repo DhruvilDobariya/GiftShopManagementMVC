@@ -33,7 +33,7 @@ namespace GiftShopManagement.Controllers
                 if (flag)
                 {
                     ModelState.Clear();
-                    TempData["Success"] = "giftType added successfully.";
+                    TempData["Success"] = "Gift type added successfully.";
                     return View();
                 }
             }
@@ -45,12 +45,12 @@ namespace GiftShopManagement.Controllers
         {
             if (Id == 0)
             {
-                return NotFound("giftType Not Found.");
+                return NotFound("Gift type Not Found.");
             }
             var giftType = await _crudRepository.GetByIdAsync(Id);
             if (giftType == null)
             {
-                return NotFound("giftType Not Found");
+                return NotFound("Gift type Not Found");
             }
             return View(giftType);
         }
@@ -64,7 +64,7 @@ namespace GiftShopManagement.Controllers
                 bool flag = await _crudRepository.UpdateAsync(giftType);
                 if (flag)
                 {
-                    TempData["Success"] = "giftType updated successfully";
+                    TempData["Success"] = "Gift type updated successfully";
                     return RedirectToAction("Index");
                 }
                 TempData["Error"] = _crudRepository.Message;
@@ -76,12 +76,12 @@ namespace GiftShopManagement.Controllers
         {
             if (Id == 0)
             {
-                return NotFound("giftType Not Found.");
+                return NotFound("Gift Type Not Found.");
             }
             bool flag = await _crudRepository.DeleteAsync(Id);
             if (flag)
             {
-                TempData["Success"] = "giftType deleted successfully.";
+                TempData["Success"] = "Gift type deleted successfully.";
                 return RedirectToAction("Index");
             }
             TempData["Error"] = _crudRepository.Message;

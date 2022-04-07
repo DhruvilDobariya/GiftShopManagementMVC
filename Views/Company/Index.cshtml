@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GiftType>
+﻿@model IEnumerable<Company>
 @{
     ViewData["Title"] = "Index";
 }
@@ -7,12 +7,12 @@
     <div class="row m-2 mt-4">
         <h2 class="col-md-6">
             <i class="fa-solid fa-earth-americas"></i>
-            Gift Type
+            Company
         </h2>
         <div class="col-md-6 text-end">
             <a class="btn btn-danger" asp-controller="Country" asp-action="Create">
                 <i class="fa-solid fa-plus"></i>
-                Add Gift Type
+                Add Company
             </a>
         </div>
     </div>
@@ -25,18 +25,18 @@
                 <th class="text-center">Delete</th>
             </thead>
             <tbody>
-                @foreach (var giftType in @Model)
+                @foreach (var company in @Model)
                 {
                     <tr>
-                        <td>@giftType.GiftTypeName</td>
-                        <td>@giftType.CreationDate</td>
+                        <td>@company.CompanyName</td>
+                        <td>@company.CreationDate</td>
                         <td class="text-center">
-                            <a class="btn btn-gradient" asp-controller="Country" asp-action="Update" asp-route-Id="@giftType.GiftTypeID">
+                            <a class="btn btn-gradient" asp-controller="Country" asp-action="Update" asp-route-Id="@company.CompanyId">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                         </td>
                         <td class="text-center">
-                            <a class="btn btn-danger" asp-controller="Country" asp-action="Delete" asp-route-Id="@giftType.GiftTypeID">
+                            <a class="btn btn-danger" asp-controller="Country" asp-action="Delete" asp-route-Id="@company.CompanyId">
                                 <i class="fa-solid fa-trash-can"></i>
                             </a>
                         </td>
