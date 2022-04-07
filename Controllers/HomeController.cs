@@ -14,13 +14,13 @@ namespace GiftShopManagement.Controllers
         {
             _logger = logger;
         }
-        [Authorize]
+        //[Authorize]
         public IActionResult Index()
         {
             return View();
         }
 
-        [Authorize(Roles = "Superusers")]
+        //[Authorize(Roles = "Superusers")]
         public IActionResult Privacy()
         {
             return View();

@@ -2,3 +2,18 @@
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/toastr/build/toastr.min.js"></script>
+@if(TempData["Success"] != null)
+{
+    <script type="text/javascript">
+        toastr.success('@TempData["Success"]')
+    </script>
+}
+@if(TempData["Error"] != null)
+{
+    <script type="text/javascript">
+        toastr.error('@TempData["Error"]')
+    </script>
+}

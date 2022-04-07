@@ -1,4 +1,37 @@
-﻿
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> _userManager
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
+
+@{
+    if (_userManager.IsSignedIn(User))
+    {
+        <div class="d-flex align-items-center justify-content-end nav-item dropdown">
+            <a runat="server" role="button" data-bs-toggle="dropdown" aria-expanded="false" class="nav-link btn text-light p-0 btn-lg me-3 d-flex align-items-end">
+                <span class="mx-2">@User.Identity.Name</span>
+                <i class="fas fa-user-circle fs-3"></i>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                    <a class="dropdown-item" asp-controller="Account" asp-action="Edit">Edit User</a>
+                </li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li>
+                    <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Log out</a>
+                </li>
+            </ul>
+        </div>
+    }
+    else
+    {
+        <a class="btn btn-gradient" asp-controller="Account" asp-action="Login">
+            <i class="fa-solid fa-right-to-bracket"></i>
+        </a>
+        @*<a class="btn btn-danger" asp-action="Login" asp-controller="Account" asp-route-returnUrl="@Context.Request.Path">Log in</a>*@
+    }
+}
+
+
