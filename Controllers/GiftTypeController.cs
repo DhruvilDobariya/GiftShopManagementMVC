@@ -27,6 +27,8 @@ namespace GiftShopManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(GiftType giftType)
         {
+            giftType.ModificationDate = DateTime.Now;
+            giftType.CreationDate = DateTime.Now;
             if (ModelState.IsValid)
             {
                 bool flag = await _crudRepository.InsertAsync(giftType);
@@ -59,6 +61,7 @@ namespace GiftShopManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(GiftType giftType)
         {
+            giftType.ModificationDate = DateTime.Now;
             if (ModelState.IsValid)
             {
                 bool flag = await _crudRepository.UpdateAsync(giftType);
