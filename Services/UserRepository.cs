@@ -3,18 +3,38 @@ using GiftShopManagement.Insterfaces;
 using GiftShopManagement.Models;
 using GiftShopManagement.ViewModels;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
+/// <summary>
+/// This Service used to Manage Users
+/// </summary>
 
 namespace GiftShopManagement.Services
 {
+    // Inherite IUserRepository
     public class UserRepository : IUserRepository
     {
+        #region Private Member
+
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly GiftShopContext _giftShopContext;
 
+        #endregion
+
+        #region Public Proparties
+
         public string Message { get; set; }
 
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Inject Dependencies
+        /// </summary>
+        /// <param name="userManager"></param>
+        /// <param name="signInManager"></param>
+        /// <param name="giftShopContext"></param>
         public UserRepository(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, GiftShopContext giftShopContext)
         {
             _userManager = userManager;
@@ -22,6 +42,18 @@ namespace GiftShopManagement.Services
             _giftShopContext = giftShopContext;
         }
 
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        /// This Method Provides Service of Create User.
+        /// </summary>
+        /// <param name="signUpModel">It is instance of SignUp Model</param>
+        /// <returns>
+        /// This Method Returns Result that provide information and logs about User like user create or not
+        /// But if exception is generate then returns null
+        /// </returns>
         public async Task<IdentityResult> CreateUserAsync(SignUp signUpModel)
         {
             try
@@ -58,6 +90,14 @@ namespace GiftShopManagement.Services
             }
         }
 
+        /// <summary>
+        /// This Method Provides Service of Log in User 
+        /// </summary>
+        /// <param name="logInModel">This is Instance of Login Model</param>
+        /// <returns>
+        /// This Method returns result which provide log about login user like "username and password are invalid" or "valid user"
+        /// But if exception is generate then returns null
+        /// </returns>
         public async Task<SignInResult> SignInUserAsync(Login logInModel)
         {
             try
@@ -72,6 +112,12 @@ namespace GiftShopManagement.Services
             }
         }
 
+        /// <summary>
+        /// This medthos provides service to sign out user
+        /// </summary>
+        /// <returns>
+        /// Return Nothing
+        /// </returns>
         public async Task SignOutAsync()
         {
             try
@@ -83,5 +129,7 @@ namespace GiftShopManagement.Services
                 Message = ex.Message;
             }
         }
+
+        #endregion
     }
 }
