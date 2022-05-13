@@ -7,19 +7,25 @@ namespace GiftShopManagement.Controllers
     public class GiftController : Controller
     {
         private readonly ICRUDRepository<Gift> _crudRepository;
+        private readonly IDropDown _dropDown;
+        private readonly IGiftRepository _giftRepository;
 
-        public GiftController(ICRUDRepository<Gift> crudRepository)
+        public GiftController(ICRUDRepository<Gift> crudRepository, IDropDown dropDown, IGiftRepository giftRepository)
         {
             _crudRepository = crudRepository;
+            _dropDown = dropDown;
+            _giftRepository = giftRepository;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _crudRepository.GetAllAsync());
+            return View(_giftRepository.GetAllWithJoin());
         }
 
         public IActionResult Create()
         {
+            ViewBag.GiftTypes = _dropDown.GiftType();
+            ViewBag.Companies = _dropDown.Company();
             return View();
         }
 
@@ -27,6 +33,9 @@ namespace GiftShopManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Gift gift)
         {
+            gift.ModificationDate = DateTime.Now;
+            gift.CreationDate = DateTime.Now;
+            gift.Quantity = 0;
             if (ModelState.IsValid)
             {
                 bool flag = await _crudRepository.InsertAsync(gift);
@@ -38,6 +47,8 @@ namespace GiftShopManagement.Controllers
                 }
             }
             TempData["Error"] = _crudRepository.Message;
+            ViewBag.GiftTypes = _dropDown.GiftType();
+            ViewBag.Companies = _dropDown.Company();
             return View(gift);
         }
 
@@ -52,6 +63,8 @@ namespace GiftShopManagement.Controllers
             {
                 return NotFound("Gift Not Found");
             }
+            ViewBag.GiftTypes = _dropDown.GiftType();
+            ViewBag.Companies = _dropDown.Company();
             return View(gift);
         }
 
@@ -59,6 +72,7 @@ namespace GiftShopManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(Gift gift)
         {
+            gift.ModificationDate = DateTime.Now;
             if (ModelState.IsValid)
             {
                 bool flag = await _crudRepository.UpdateAsync(gift);
@@ -69,6 +83,8 @@ namespace GiftShopManagement.Controllers
                 }
                 TempData["Error"] = _crudRepository.Message;
             }
+            ViewBag.GiftTypes = _dropDown.GiftType();
+            ViewBag.Companies = _dropDown.Company();
             return View(gift);
         }
 

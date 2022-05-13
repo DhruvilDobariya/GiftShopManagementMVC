@@ -13,15 +13,18 @@ namespace GiftShopManagement.Models
         [Required(ErrorMessage = "Please Enter Gift Name")]
         [MaxLength(250, ErrorMessage = "Gift Name Max length must less then or equal to 250 character")]
         [MinLength(1, ErrorMessage = "Gift Name must at least one character")]
+        [Display(Name = "Gift Name")]
         public string GiftName { get; set; } = null!;
 
         [Required(ErrorMessage = "Please Enter Gift Type Name")]
         [ForeignKey("GiftType")]
+        [Display(Name = "Gift Type")]
         public int GiftTypeId { get; set; }
 
         [Required(ErrorMessage = "Please Enter Company Name")]
         [ForeignKey("Company")]
-        public int CompanyID { get; set; }
+        [Display(Name = "Company Name")]
+        public int CompanyId { get; set; }
 
         [DataType(DataType.Currency)]
         [Display(Name = "Price Per Pice")]

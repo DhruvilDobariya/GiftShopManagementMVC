@@ -1,0 +1,52 @@
+﻿@model Gift
+@{
+    ViewData["Title"] = "Create - Gift";
+}
+
+<div class="border p-4">
+    <div>
+        <h2>
+            Create Gift Type
+        </h2>
+    </div>
+    <div>
+        <form method="post">
+            <div class="row mt-2">
+                 <div class="col-md-6">
+                    <label class="form-label" asp-for=GiftName></label>
+                    <input type="text" class="form-control" asp-for="GiftName" />
+                    <span class="text-danger" asp-validation-for="GiftName"></span>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" asp-for=PricePerPice></label>
+                    <input class="form-control" asp-for="PricePerPice" />
+                    <span class="text-danger" asp-validation-for="PricePerPice"></span>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <label class="form-label" asp-for=GiftTypeId></label>
+                    <select class="form-control" asp-for="GiftTypeId" asp-items="@ViewBag.GiftTypes">
+                        <option disabled selected value="-1">Select Gift Type</option>
+                    </select>
+                    <span class="text-danger" asp-validation-for="GiftTypeId"></span>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" asp-for=CompanyId></label>
+                    <select class="form-control" asp-for="CompanyId" asp-items="@ViewBag.Companies">
+                        <option disabled selected value="-1">Select Company Name</option>
+                    </select>
+                    <span class="text-danger" asp-validation-for="CompanyId"></span>
+                </div>
+            </div>
+            <div class="mt-3">
+                <button class="btn btn-gradient" type="submit">Submit</button>
+                <a class="btn btn-danger" type="button" asp-controller="Gift" asp-action="Index">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"></partial>
+}

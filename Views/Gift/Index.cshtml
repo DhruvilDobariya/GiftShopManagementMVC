@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Gift>
+@{
+    ViewData["Title"] = "Index - Gift";
+}
+
+<div class="row border">
+    <div class="row m-2 mt-4">
+        <h2 class="col-md-6">
+            <i class="fa-solid fa-earth-americas"></i>
+            Gift Type
+        </h2>
+        <div class="col-md-6 text-end">
+            <a class="btn btn-danger" asp-controller="Gift" asp-action="Create">
+                <i class="fa-solid fa-plus"></i>
+                Add Gift
+            </a>
+        </div>
+    </div>
+    <div class="row m-2">
+        <table class="table table-hover" id="table">
+            <thead class="header2 text-light">
+                <th>Name</th>
+                <th>Gift Type</th>
+                <th>Company Name</th>
+                <th>Price Per Pice</th>
+                <th>Quantity</th>
+                <th>Modification Date</th>
+                <th>Creation Date</th>
+                <th class="text-center">Stock</th>
+                <th class="text-center">Edit</th>
+                <th class="text-center">Delete</th>
+            </thead>
+            <tbody>
+                @foreach (var gift in @Model)
+                {
+                    <tr>
+                        <td>@gift.GiftName</td>
+                        <td>@gift.GiftType.GiftTypeName</td>
+                        <td>@gift.Company.CompanyName</td>
+                        <td>@gift.PricePerPice</td>
+                        <td>@gift.Quantity</td>
+                        <td>@gift.ModificationDate</td>
+                        <td>@gift.CreationDate</td>
+                        <td class="text-center">
+                            <a class="btn btn-gradient" asp-controller="Stock" asp-action="Index" asp-route-Id="@gift.GiftId">
+                                <i class="fa-solid fa-warehouse"></i>
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a class="btn btn-gradient" asp-controller="Gift" asp-action="Update" asp-route-Id="@gift.GiftId">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a class="btn btn-danger" asp-controller="Gift" asp-action="Delete" asp-route-Id="@gift.GiftId">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

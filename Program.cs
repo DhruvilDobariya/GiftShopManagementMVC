@@ -25,6 +25,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFramework
 
 builder.Services.AddTransient(typeof(ICRUDRepository<>), typeof(CRUDRepository<>));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IDropDown, DropDown>();
+builder.Services.AddScoped<IGiftRepository, GiftRepository>();
 
 var app = builder.Build();
 
