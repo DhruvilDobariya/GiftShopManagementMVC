@@ -27,6 +27,7 @@ builder.Services.AddTransient(typeof(ICRUDRepository<>), typeof(CRUDRepository<>
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IDropDown, DropDown>();
 builder.Services.AddScoped<IGiftRepository, GiftRepository>();
+builder.Services.AddScoped<IStockRepository, StockRepository>();
 
 var app = builder.Build();
 

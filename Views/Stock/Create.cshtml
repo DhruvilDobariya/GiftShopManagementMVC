@@ -1,0 +1,39 @@
+﻿@model Stock
+@{
+    ViewData["Title"] = "Create - Stock";
+}
+
+<div class="border p-4">
+    <div>
+        <h2>
+            Create Stock
+        </h2>
+    </div>
+    <div>
+        <form method="post">
+            <div class="row mt-2">
+                <div>
+                    <input asp-for="GiftId" value="@Context.Request.Path.ToString().Split("/")[3]" hidden/>
+                </div>
+                 <div class="col-md-6">
+                    <label class="form-label" asp-for=Quantity></label>
+                    <input type="text" class="form-control" asp-for="Quantity" />
+                    <span class="text-danger" asp-validation-for="Quantity"></span>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label" asp-for=StockDeliveryDate></label>
+                    <input class="form-control" asp-for="StockDeliveryDate" />
+                    <span class="text-danger" asp-validation-for="StockDeliveryDate"></span>
+                </div>
+            </div>
+            <div class="mt-3">
+                <button class="btn btn-gradient" type="submit">Submit</button>
+                <a class="btn btn-danger" type="button" asp-controller="Stock" asp-action="Index" asp-route-id="@Context.Request.Path.ToString().Split("/")[3]">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial"></partial>
+}

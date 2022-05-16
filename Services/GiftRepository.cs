@@ -26,6 +26,8 @@ namespace GiftShopManagement.Services
                             PricePerPice = Gift.PricePerPice,
                             Quantity = Gift.Quantity,
                             GiftType = GiftType,
+                            CreationDate = Gift.CreationDate,
+                            ModificationDate = Gift.ModificationDate,
                             Company = Company
                         };
             return query;
