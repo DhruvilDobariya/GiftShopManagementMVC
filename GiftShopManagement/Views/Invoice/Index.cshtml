@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Invoice>
+@{
+    ViewData["Title"] = "Index - Invoice";
+}
+
+<div class="row border">
+    <div class="row m-2 mt-4">
+        <h2 class="col-md-6">
+            <i class="fa-solid fa-earth-americas"></i>
+            Invoice
+        </h2>
+        <div class="col-md-6 text-end">
+            <a class="btn btn-danger" asp-controller="Gift" asp-action="Create">
+                <i class="fa-solid fa-plus"></i>
+                Add Invoice
+            </a>
+        </div>
+    </div>
+    <div class="row m-2">
+        <table class="table table-hover" id="table">
+            <thead class="header2 text-light">
+            <th>Customer Name</th>
+            <th>Email</th>
+            <th>Mobile No</th>
+            <th>Total Price</th>
+            <th>Address</th>
+            <th>Modification Date</th>
+            <th>Creation Date</th>
+            <th class="text-center">Stock</th>
+            <th class="text-center">Edit</th>
+            <th class="text-center">Delete</th>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var invoice in @Model)
+                    {
+                        <tr>
+                            <td>@invoice.CustomerName</td>
+                            <td>@invoice.Email</td>
+                            <td>@invoice.MobileNo</td>
+                            <td>@invoice.TotalPrice</td>
+                            <td>@invoice.Address</td>
+                            <td>@invoice.ModificationDate</td>
+                            <td>@invoice.CreationDate</td>
+                            <td class="text-center">
+                                <a class="btn btn-gradient" asp-controller="Invoice" asp-action="Detail" asp-route-Id="@invoice.InvoiceId">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-gradient" asp-controller="Invoice" asp-action="Update" asp-route-Id="@invoice.InvoiceId">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-danger" asp-controller="Invoice" asp-action="Delete" asp-route-Id="@invoice.InvoiceId">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

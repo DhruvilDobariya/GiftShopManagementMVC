@@ -1,0 +1,60 @@
+﻿@using GiftShopManagement.Repositories
+@model IEnumerable<Stock>
+@inject ICRUDRepository<Gift> _crudRepository
+@{
+    ViewData["Title"] = "Index - Stock";
+}
+
+<div class="row border">
+    <div class="row m-2 mt-4">
+        <h2 class="col-md-6">
+            <i class="fa-solid fa-earth-americas"></i>
+            @{
+                Gift gift = await _crudRepository.GetByIdAsync(Convert.ToInt32(Context.Request.Path.ToString().Split("/")[3]));
+                <span>Stock of @gift.GiftName : @gift.Quantity</span>
+            }
+        </h2>
+        <div class="col-md-6 text-end">
+            <a class="btn btn-danger" asp-controller="Stock" asp-action="Create" asp-route-id="@Context.Request.Path.ToString().Split("/")[3]">
+                <i class="fa-solid fa-plus"></i>
+                Add Stock 
+            </a>
+        </div>
+    </div>
+    <div class="row m-2">
+        <table class="table table-hover" id="table">
+            <thead class="header2 text-light">
+            <th>Quantity</th>
+            <th>Stock Delivery Date</th>
+            <th>Modification Date</th>
+            <th>Creation Date</th>
+            <th class="text-center">Edit</th>
+            <th class="text-center">Delete</th>
+            </thead>
+            @if (Model != null)
+            {
+                <tbody>
+                    @foreach (var stock in @Model)
+                    {
+                        <tr>
+                            <td>@stock.Quantity</td>
+                            <td>@stock.StockDeliveryDate</td>
+                            <td>@stock.ModificationDate</td>
+                            <td>@stock.CreationDate</td>
+                            <td class="text-center">
+                                <a class="btn btn-gradient" asp-controller="Stock" asp-action="Update" asp-route-Id="@stock.StockId" asp-route-giftId="@Context.Request.Path.ToString().Split("/")[3]">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-danger" asp-controller="Stock" asp-action="Delete" asp-route-Id="@stock.StockId">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            }
+        </table>
+    </div>
+</div>
