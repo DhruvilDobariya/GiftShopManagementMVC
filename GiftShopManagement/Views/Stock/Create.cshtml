@@ -17,10 +17,15 @@
                 </div>
                  <div class="col-md-6">
                     <label class="form-label" asp-for=Quantity></label>
-                    <input type="text" class="form-control" asp-for="Quantity" />
+                    <input class="form-control" asp-for="Quantity" />
                     <span class="text-danger" asp-validation-for="Quantity"></span>
                 </div>
-                <div class="col-md-6">
+                 <div class="col-md-6">
+                    <label class="form-label" asp-for=PricePerPice></label>
+                    <input class="form-control" asp-for="PricePerPice" />
+                    <span class="text-danger" asp-validation-for="PricePerPice"></span>
+                </div>
+                <div class="col-md-12">
                     <label class="form-label" asp-for=StockDeliveryDate></label>
                     <input class="form-control" asp-for="StockDeliveryDate" />
                     <span class="text-danger" asp-validation-for="StockDeliveryDate"></span>

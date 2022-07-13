@@ -15,6 +15,14 @@ namespace GiftShopManagement.Models
         [Required(ErrorMessage = "Please Enter Quantity Gift")]
         public int Quantity { get; set; }
 
+        [DataType(DataType.Currency)]
+        [Display(Name = "Price Per Pice")]
+        public decimal PricePerPice { get; set; }
+
+        [DataType(DataType.Currency)]
+        [Display(Name = "Total Price")]
+        public decimal TotalPrice { get; set; }
+
         [Required(ErrorMessage = "Please Enter Stock Delivery Date")]
         [Display(Name = "Stock Delivery Date")]
         public DateTime StockDeliveryDate { get; set; }

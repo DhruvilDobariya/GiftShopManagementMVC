@@ -24,6 +24,8 @@ namespace GiftShopManagement.Repositories.Services
                                           StockId = Stock.StockId,
                                           GiftId = Stock.GiftId,
                                           Quantity = Stock.Quantity,
+                                          PricePerPice = Stock.PricePerPice,
+                                          TotalPrice = Stock.TotalPrice,
                                           StockDeliveryDate = Stock.StockDeliveryDate,
                                           CreationDate = Stock.CreationDate,
                                           ModificationDate = Stock.ModificationDate,
@@ -31,11 +33,11 @@ namespace GiftShopManagement.Repositories.Services
                                       };
             return query;
         }
-        public async Task<bool> DeleteAsync(int Id)
+        public async Task<bool> DeleteAsync(int stockId, int giftId)
         {
             try
             {
-                var stock = await _context.Stock.FindAsync(Id);
+                var stock = await _context.Stock.FindAsync(stockId);
                 if (stock == null)
                 {
                     Message = "Not Found";
@@ -43,7 +45,7 @@ namespace GiftShopManagement.Repositories.Services
                 }
                 if (_context.Remove(stock) != null)
                 {
-                    Gift gift = await _context.Gift.FindAsync(Id);
+                    Gift gift = await _context.Gift.FindAsync(giftId);
                     gift.Quantity -= stock.Quantity;
 
                     if (_context.Update(gift) != null)

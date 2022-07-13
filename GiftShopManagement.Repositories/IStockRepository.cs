@@ -8,6 +8,6 @@ namespace GiftShopManagement.Repositories
         IQueryable<Stock> GetAllWithJoin(int giftId);
         Task<bool> InsertAsync(Stock stock);
         Task<bool> UpdateAsync(Stock stock);
-        Task<bool> DeleteAsync(int Id);
+        Task<bool> DeleteAsync(int stockId, int giftId);
     }
 }

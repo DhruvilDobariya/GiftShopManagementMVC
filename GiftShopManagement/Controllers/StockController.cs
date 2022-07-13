@@ -34,6 +34,7 @@ namespace stockShopManagement.Controllers
         {
             stock.ModificationDate = DateTime.Now;
             stock.CreationDate = DateTime.Now;
+            stock.TotalPrice = stock.Quantity * stock.PricePerPice;
             if (ModelState.IsValid)
             {
                 bool flag = await _stockRepository.InsertAsync(stock);
@@ -67,6 +68,7 @@ namespace stockShopManagement.Controllers
         public async Task<IActionResult> Update(Stock stock)
         {
             stock.ModificationDate = DateTime.Now;
+            stock.TotalPrice = stock.Quantity * stock.PricePerPice;
             if (ModelState.IsValid)
             {
                 bool flag = await _stockRepository.UpdateAsync(stock);
@@ -80,20 +82,20 @@ namespace stockShopManagement.Controllers
             return View(stock);
         }
 
-        public async Task<IActionResult> Delete(int Id)
+        public async Task<IActionResult> Delete(int giftId, int Id)
         {
             if (Id == 0)
             {
                 return NotFound("stock Not Found.");
             }
-            bool flag = await _stockRepository.DeleteAsync(Id);
+            bool flag = await _stockRepository.DeleteAsync(Id, giftId);
             if (flag)
             {
                 TempData["Success"] = "stock deleted successfully.";
                 return RedirectToAction("Index");
             }
             TempData["Error"] = _stockRepository.Message;
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Stock", new {id = Id});
         }
     }
 }

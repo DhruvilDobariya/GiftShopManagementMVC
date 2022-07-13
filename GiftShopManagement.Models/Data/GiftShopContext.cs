@@ -8,13 +8,12 @@ namespace GiftShopManagement.Models.Data
         public GiftShopContext(DbContextOptions<GiftShopContext> options) : base(options)
         {
         }
-        public DbSet<GiftType> GiftType { get; set; }
-        public DbSet<Company> Company { get; set; }
-        public DbSet<Gift> Gift { get; set; }
-        public DbSet<Invoice> Invoice { get; set; }
-        public DbSet<InvoiceWiseGift> InvoiceWiseGift { get; set; }
-        public DbSet<Stock> Stock { get; set; }
-        public DbSet<Sell> Sell { get; set; }
+        public virtual DbSet<GiftType> GiftType { get; set; }
+        public virtual DbSet<Company> Company { get; set; }
+        public virtual DbSet<Gift> Gift { get; set; }
+        public virtual DbSet<Invoice> Invoice { get; set; }
+        public virtual DbSet<InvoiceWiseGift> InvoiceWiseGift { get; set; }
+        public virtual DbSet<Stock> Stock { get; set; }
 
     }
 }
